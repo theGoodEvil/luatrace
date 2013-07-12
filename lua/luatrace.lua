@@ -184,9 +184,11 @@ local function record(action, line, time)
       if should_trace(callee) then
         recorder.record("<")
       end
-      if not caller then                        -- final return from a coroutine,
-        recorder.record("Y")                    -- looks like a yield
-      end
+      -- For callback functions called from Moai (like the draw callback of MOAIScriptDeck)
+      -- this would record yields without preceding resume.
+      -- if not caller then                        -- final return from a coroutine,
+      --   recorder.record("Y")                    -- looks like a yield
+      -- end
     end
 
   elseif action == "tail return" then
