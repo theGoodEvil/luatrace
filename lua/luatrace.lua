@@ -83,7 +83,7 @@ end
 
 -- We only trace Lua functions
 local function should_trace(f)
-  return f and f.source:sub(1,1) == "@"
+  return f and string.sub(f.source,1,1) == "@"
 end
 
 
